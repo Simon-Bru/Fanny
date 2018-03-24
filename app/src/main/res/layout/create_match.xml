@@ -1,8 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
-    tools:context="edu.bruguerolle.rocher.fanny.CreateMatch">
+    android:layout_width="match_parent">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="edu.bruguerolle.rocher.fanny.CreateMatch">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="293dp"
+            android:layout_height="61dp"
+            android:text="New Match" />
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Player 1 name">
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/player1Name"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Player 2 name ">
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/player2Name"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/startMatchButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="3, 2, 1, Let's Go !" />
+
+
+    </LinearLayout>
+
+</ScrollView>

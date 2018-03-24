@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="edu.bruguerolle.rocher.fanny.RecordMatch"
+    android:orientation="vertical">
+
+    <!--TODO Insérer Score-->
+
+
+    <FrameLayout
+        android:id="@+id/RecordFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            android:name="edu.bruguerolle.rocher.fanny.DeroulementMatch"
+            android:layout_width="match_parent"
+            android:layout_height="47dp" />
+
+    </FrameLayout>
+</LinearLayout>

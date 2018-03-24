@@ -20,7 +20,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".CreateMatch" />
-        <activity android:name=".PreviousMatches"></activity>
+        <activity android:name=".PreviousMatches" />
+        <activity android:name=".RecordMatch"></activity>
     </application>
 
 </manifest>
