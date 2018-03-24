@@ -9,12 +9,35 @@
     tools:showIn="@layout/app_bar_main">
 
     <TextView
+        android:id="@+id/Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="92dp"
+        android:fontFamily="serif-monospace"
+        android:text="Fanny"
+        android:textSize="45sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/NewMatchButton"
+        android:layout_width="153dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="73dp"
+        android:text="New Match"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Title" />
+
+    <Button
+        android:id="@+id/PreviousMatchesButton"
+        android:layout_width="161dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="35dp"
+        android:text="Previous Matches"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/NewMatchButton" />
 
 </android.support.constraint.ConstraintLayout>
