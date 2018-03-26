@@ -3,6 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="edu.bruguerolle.rocher.fanny.PreviousMatches">
+    tools:context="edu.bruguerolle.rocher.fanny.activities.PreviousMatches">
 
 </android.support.constraint.ConstraintLayout>

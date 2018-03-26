@@ -1,19 +1,18 @@
-package edu.bruguerolle.rocher.fanny;
+package edu.bruguerolle.rocher.fanny.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
+
+import edu.bruguerolle.rocher.fanny.R;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -25,8 +24,8 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Button newMatch = (Button) findViewById(R.id.NewMatchButton);
-        Button previousMatch = (Button) findViewById(R.id.PreviousMatchesButton);
+        Button newMatch = findViewById(R.id.NewMatchButton);
+        Button previousMatch = findViewById(R.id.PreviousMatchesButton);
         newMatch.setOnClickListener(newMatchHandler);
         previousMatch.setOnClickListener(previousMatchHandler);
 
@@ -70,7 +69,7 @@ public class MainActivity extends AppCompatActivity
 
     View.OnClickListener newMatchHandler = new View.OnClickListener() {
         public void onClick(View v) {
-            Intent startCreateActivity = new Intent(MainActivity.this,CreateMatch.class);
+            Intent startCreateActivity = new Intent(MainActivity.this,CreateMatchActivity.class);
             startActivity(startCreateActivity);
         }
     };

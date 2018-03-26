@@ -1,16 +1,17 @@
-package edu.bruguerolle.rocher.fanny;
+package edu.bruguerolle.rocher.fanny.activities;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class RecordMatch extends AppCompatActivity implements DeroulementMatch.InterfaceButtonsListener{
+import edu.bruguerolle.rocher.fanny.DeroulementMatch;
+import edu.bruguerolle.rocher.fanny.R;
+
+public class RecordMatchActivity extends AppCompatActivity implements DeroulementMatch.InterfaceButtonsListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +35,7 @@ public class RecordMatch extends AppCompatActivity implements DeroulementMatch.I
 
     View.OnClickListener stopMatchHandler = new View.OnClickListener() {
         public void onClick(View v) {
-            Intent stopRecordActivity = new Intent(RecordMatch.this,PhotoActivity.class);
+            Intent stopRecordActivity = new Intent(RecordMatchActivity.this,PhotoActivity.class);
             startActivity(stopRecordActivity);
         }
     };

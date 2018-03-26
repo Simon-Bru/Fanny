@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="edu.bruguerolle.rocher.fanny.RecordMatch"
+    tools:context="edu.bruguerolle.rocher.fanny.activities.RecordMatchActivity"
     android:orientation="vertical">
 
     <!--TODO Insérer Score-->

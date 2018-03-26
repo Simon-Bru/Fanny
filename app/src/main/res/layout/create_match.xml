@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context="edu.bruguerolle.rocher.fanny.CreateMatch">
+        tools:context="edu.bruguerolle.rocher.fanny.activities.CreateMatchActivity">
 
         <TextView
             android:id="@+id/textView2"
