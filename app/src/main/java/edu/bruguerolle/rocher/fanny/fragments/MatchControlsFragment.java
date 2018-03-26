@@ -1,4 +1,4 @@
-package edu.bruguerolle.rocher.fanny;
+package edu.bruguerolle.rocher.fanny.fragments;
 
 import android.content.Context;
 import android.net.Uri;
@@ -8,16 +8,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import edu.bruguerolle.rocher.fanny.R;
+
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link DeroulementMatch.InterfaceButtonsListener} interface
+ * {@link MatchControlsFragment.InterfaceButtonsListener} interface
  * to handle interaction events.
- * Use the {@link DeroulementMatch#newInstance} factory method to
+ * Use the {@link MatchControlsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DeroulementMatch extends Fragment {
+public class MatchControlsFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -29,7 +31,7 @@ public class DeroulementMatch extends Fragment {
 
     private InterfaceButtonsListener mListener;
 
-    public DeroulementMatch() {
+    public MatchControlsFragment() {
         // Required empty public constructor
     }
 
@@ -38,11 +40,11 @@ public class DeroulementMatch extends Fragment {
      * this fragment using the provided parameters.
      *
 
-     * @return A new instance of fragment DeroulementMatch.
+     * @return A new instance of fragment MatchControlsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static DeroulementMatch newInstance() {
-        DeroulementMatch fragment = new DeroulementMatch();
+    public static MatchControlsFragment newInstance() {
+        MatchControlsFragment fragment = new MatchControlsFragment();
         Bundle args = new Bundle();
 
         fragment.setArguments(args);

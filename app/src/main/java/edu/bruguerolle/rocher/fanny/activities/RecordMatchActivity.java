@@ -8,20 +8,20 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import edu.bruguerolle.rocher.fanny.DeroulementMatch;
+import edu.bruguerolle.rocher.fanny.fragments.MatchControlsFragment;
 import edu.bruguerolle.rocher.fanny.R;
 
-public class RecordMatchActivity extends AppCompatActivity implements DeroulementMatch.InterfaceButtonsListener {
+public class RecordMatchActivity extends AppCompatActivity implements MatchControlsFragment.InterfaceButtonsListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.record_match);
         FragmentTransaction transac = getSupportFragmentManager().beginTransaction();
-        transac.replace(R.id.RecordFragment, DeroulementMatch.newInstance()).commit();
+        transac.replace(R.id.RecordFragment, MatchControlsFragment.newInstance()).commit();
 
         FragmentTransaction transac2 = getSupportFragmentManager().beginTransaction();
-        transac2.replace(R.id.RecordFragment2, DeroulementMatch.newInstance()).commit();
+        transac2.replace(R.id.RecordFragment2, MatchControlsFragment.newInstance()).commit();
 
         Button stopMatch = findViewById(R.id.StopMatchButton);
         stopMatch.setOnClickListener(stopMatchHandler);
