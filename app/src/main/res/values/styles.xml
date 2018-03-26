@@ -6,6 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="buttonStyle">@style/greenBtn</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -28,6 +29,10 @@
         <item name="android:layout_marginEnd">19dp</item>
         <item name="android:layout_width">20dp</item>
         <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="greenBtn" parent="Base.TextAppearance.AppCompat.Button">
+        <item name="android:background">@drawable/btn_bg</item>
     </style>
 
 </resources>
