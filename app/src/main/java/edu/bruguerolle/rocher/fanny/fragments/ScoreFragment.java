@@ -121,11 +121,6 @@ public class ScoreFragment extends Fragment {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-    }
-
-    @Override
     public void onSaveInstanceState(Bundle state) {
         super.onSaveInstanceState(state);
         state.putBoolean(ARG_IS_OPPONENT, isRed);
