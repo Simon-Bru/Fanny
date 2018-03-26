@@ -13,11 +13,19 @@
         android:id="@+id/RecordFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+    </FrameLayout>
 
-        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-            android:name="edu.bruguerolle.rocher.fanny.DeroulementMatch"
-            android:layout_width="match_parent"
-            android:layout_height="47dp" />
+    <FrameLayout
+        android:id="@+id/RecordFragment2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     </FrameLayout>
+
+    <Button
+        android:id="@+id/StopMatchButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button" />
+
 </LinearLayout>

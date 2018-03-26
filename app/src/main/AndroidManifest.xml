@@ -21,7 +21,8 @@
         </activity>
         <activity android:name=".CreateMatch" />
         <activity android:name=".PreviousMatches" />
-        <activity android:name=".RecordMatch"></activity>
+        <activity android:name=".RecordMatch" />
+        <activity android:name=".PhotoActivity"></activity>
     </application>
 
 </manifest>
