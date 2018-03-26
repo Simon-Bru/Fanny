@@ -1,0 +1,51 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="edu.bruguerolle.rocher.fanny.DeroulementMatch">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/PlayerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Player " />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <Button
+                android:id="@+id/Beers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Beer" />
+
+            <Button
+                android:id="@+id/Gamelle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gamelle" />
+
+            <Button
+                android:id="@+id/Pissette"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pissette" />
+
+            <Button
+                android:id="@+id/Cendar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Cendar" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>
