@@ -30,10 +30,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.CreateMatchActivity" />
-        <activity android:name=".activities.PreviousMatches" />
-        <activity android:name=".activities.RecordMatchActivity" />
-        <activity android:name=".activities.PhotoActivity"></activity>
+        <activity android:name=".activities.CreateMatchActivity"
+            android:parentActivityName=".activities.MainActivity"/>
+        <activity android:name=".activities.PreviousMatches"
+            android:parentActivityName=".activities.MainActivity"/>
+        <activity android:name=".activities.RecordMatchActivity"
+            android:parentActivityName=".activities.CreateMatchActivity"/>
+        <activity
+            android:name=".activities.PhotoActivity"
+            android:parentActivityName=".activities.MainActivity" />
     </application>
 
 </manifest>

@@ -20,7 +20,7 @@
 
     <style name="title">
         <item name="android:fontFamily">@font/fasterone_regular</item>
-        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textColor">@android:color/white</item>
         <item name="android:textSize">35sp</item>
     </style>
 

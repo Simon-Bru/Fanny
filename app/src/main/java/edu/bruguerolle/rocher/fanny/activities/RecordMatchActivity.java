@@ -42,11 +42,14 @@ public class RecordMatchActivity extends AppCompatActivity
         Bundle bundle = getIntent().getExtras();
         Player player1 = new Player();
         Player player2 = new Player();
-        if(bundle != null) {
+        if(bundle != null && bundle.getString(PLAYER_1) != null) {
             player1.setName(bundle.getString(PLAYER_1));
-            player2.setName(bundle.getString(PLAYER_2));
         } else {
             player1.setName("Player 1");
+        }
+        if(bundle != null && bundle.getString(PLAYER_2) != null) {
+            player2.setName(bundle.getString(PLAYER_2));
+        } else {
             player2.setName("Player 2");
         }
         match.setPlayer1(player1);
