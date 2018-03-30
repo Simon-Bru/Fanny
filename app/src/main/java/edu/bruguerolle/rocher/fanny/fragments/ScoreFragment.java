@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
 import android.support.v4.app.Fragment;
-import android.text.TextWatcher;
 import android.transition.TransitionManager;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -46,7 +45,7 @@ public class ScoreFragment extends Fragment {
     private static final String ARG_IS_OPPONENT = "is_opponent";
     private static final String ARG_REMAINING_PTS = "remaining_points";
 
-    private boolean isRed;
+    private boolean isOpponent;
 
     private View root;
 
@@ -76,7 +75,7 @@ public class ScoreFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            isRed = getArguments().getBoolean(ARG_IS_OPPONENT);
+            isOpponent = getArguments().getBoolean(ARG_IS_OPPONENT);
         }
     }
 
@@ -86,7 +85,7 @@ public class ScoreFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_score, container, false);
 
-        if(!isRed) {
+        if(!isOpponent) {
             for (int point : pointsImg) {
                 ImageView pointImg = view.findViewById(point);
                 pointImg.setImageDrawable(getActivity().getDrawable(R.drawable.blue_point));
@@ -111,7 +110,7 @@ public class ScoreFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (savedInstanceState != null) {
-            isRed = savedInstanceState.getBoolean(ARG_IS_OPPONENT);
+            isOpponent = savedInstanceState.getBoolean(ARG_IS_OPPONENT);
             remainingPoints = pointsImg.length - 1;
 
             while(remainingPoints > savedInstanceState.getInt(ARG_REMAINING_PTS)) {
@@ -123,7 +122,7 @@ public class ScoreFragment extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle state) {
         super.onSaveInstanceState(state);
-        state.putBoolean(ARG_IS_OPPONENT, isRed);
+        state.putBoolean(ARG_IS_OPPONENT, isOpponent);
         state.putInt(ARG_REMAINING_PTS, remainingPoints);
     }
 
@@ -155,8 +154,8 @@ public class ScoreFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface ScoreChangeListener {
-        void onPointMarked(boolean isRed, boolean isPositive);
-        void onMatchOver(boolean isRed);
+        void onPointMarked(boolean isOpponent, boolean isPositive);
+        void onMatchOver(boolean isOpponent);
     }
 
     private void movePoint(boolean isPosivitive) {
@@ -172,7 +171,7 @@ public class ScoreFragment extends Fragment {
             constraintSet = pullRight(constraintSet, point.getId());
 
             if(remainingPoints == 0) {
-                mListener.onMatchOver(isRed);
+                mListener.onMatchOver(isOpponent);
             } else {
                 remainingPoints =  remainingPoints - 1;
             }
@@ -227,7 +226,7 @@ public class ScoreFragment extends Fragment {
             if(Math.abs(velocityX) > Math.abs(velocityY) &&
                     remainingPoints < pointsImg.length && remainingPoints >= 0) {
                 boolean isPosivitive = velocityX > 0;
-                mListener.onPointMarked(isRed, isPosivitive);
+                mListener.onPointMarked(isOpponent, isPosivitive);
                 movePoint(isPosivitive);
                 return true;
             } else {

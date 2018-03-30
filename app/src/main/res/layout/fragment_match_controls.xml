@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     tools:context="edu.bruguerolle.rocher.fanny.fragments.MatchControlsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -12,39 +11,61 @@
 
         <TextView
             android:id="@+id/PlayerName"
+            android:textSize="25sp"
+            android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Player " />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
             <Button
-                android:id="@+id/Beers"
+                android:id="@+id/beerBtn"
+                style="@style/outlineBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="50dp"
+                android:layout_marginStart="50dp"
+                android:layout_weight="1"
                 android:text="Beer" />
 
             <Button
-                android:id="@+id/Gamelle"
+                android:id="@+id/gamelleBtn"
+                style="@style/outlineBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="50dp"
+                android:layout_marginStart="50dp"
+                android:layout_weight="1"
                 android:text="Gamelle" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content">
 
             <Button
-                android:id="@+id/Pissette"
+                android:id="@+id/pissetteBtn"
+                style="@style/outlineBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:layout_marginEnd="50dp"
+                android:layout_marginStart="50dp"
                 android:text="Pissette" />
 
             <Button
-                android:id="@+id/Cendar"
+                android:id="@+id/cendarBtn"
+                style="@style/outlineBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="0.5"
+                android:layout_marginEnd="50dp"
+                android:layout_marginStart="50dp"
                 android:text="Cendar" />
         </LinearLayout>
     </LinearLayout>

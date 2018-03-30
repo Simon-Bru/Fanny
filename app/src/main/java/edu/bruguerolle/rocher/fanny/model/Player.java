@@ -1,33 +1,38 @@
 package edu.bruguerolle.rocher.fanny.model;
 
-/**
- * Created by cleme on 26/03/2018.
- */
-
 public class Player {
 
+    private int id;
+    private String name;
+    private int score       = 0;
+    private int playerBeer  = 0;
+    private int gammelleNb  = 0;
+    private int cendarNb    = 0;
+    private int pissetNb    = 0;
+    private boolean fanny   = false;
 
-    private String playerName;
-    private int playerScore;
-    private int playerBeer;
-    private int playerGamelle;
-    private int playerCendar;
-    private int playerFanny;
-
-    public String getPlayerName() {
-        return playerName;
+    public int getId() {
+        return id;
     }
 
-    public void setPlayerName(String playerName) {
-        this.playerName = playerName;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public int getPlayerScore() {
-        return playerScore;
+    public String getName() {
+        return name;
     }
 
-    public void setPlayerScore(int playerScore) {
-        this.playerScore = playerScore;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 
     public int getPlayerBeer() {
@@ -38,30 +43,37 @@ public class Player {
         this.playerBeer = playerBeer;
     }
 
-    public int getPlayerGamelle() {
-        return playerGamelle;
+    public int getGammelleNb() {
+        return gammelleNb;
     }
 
-    public void setPlayerGamelle(int playerGamelle) {
-        this.playerGamelle = playerGamelle;
+    public void setGammelleNb(int gammelleNb) {
+        this.gammelleNb = gammelleNb;
     }
 
-    public int getPlayerCendar() {
-        return playerCendar;
+    public int getCendarNb() {
+        return cendarNb;
     }
 
-    public void setPlayerCendar(int playerCendar) {
-        this.playerCendar = playerCendar;
+    public void setCendarNb(int cendarNb) {
+        this.cendarNb = cendarNb;
     }
 
-    public int getPlayerFanny() {
-        return playerFanny;
+    public int getPissetNb() {
+        return pissetNb;
     }
 
-    public void setPlayerFanny(int playerFanny) {
-        this.playerFanny = playerFanny;
+    public void setPissetNb(int pissetNb) {
+        this.pissetNb = pissetNb;
     }
 
+    public boolean isFanny() {
+        return fanny;
+    }
+
+    public void setFanny(boolean fanny) {
+        this.fanny = fanny;
+    }
 
     public Player() {
     }

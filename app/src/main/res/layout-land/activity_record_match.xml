@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="edu.bruguerolle.rocher.fanny.activities.RecordMatchActivity">
+    <LinearLayout
+        android:layout_alignParentStart="true"
+        android:orientation="horizontal"
+        android:id="@+id/RecordFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" >
+        <com.github.rongi.rotate_layout.layout.RotateLayout
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:angle="90">
+            <LinearLayout
+                android:id="@+id/scoreContainer1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" />
+        </com.github.rongi.rotate_layout.layout.RotateLayout>
+        <LinearLayout
+            android:id="@+id/controlsContainer1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/RecordFragment2"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/controlsContainer2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" />
+
+        <com.github.rongi.rotate_layout.layout.RotateLayout
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:angle="90">
+            <LinearLayout
+                android:id="@+id/scoreContainer2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" />
+        </com.github.rongi.rotate_layout.layout.RotateLayout>
+    </LinearLayout>
+</RelativeLayout>

@@ -39,7 +39,9 @@
 
         <Button
             android:id="@+id/startMatchButton"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content"
             android:text="3, 2, 1, Let's Go !" />
 

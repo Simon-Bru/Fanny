@@ -31,8 +31,14 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="greenBtn" parent="Base.TextAppearance.AppCompat.Button">
+    <style name="greenBtn" parent="Base.Widget.AppCompat.Button">
         <item name="android:background">@drawable/btn_bg</item>
+    </style>
+
+    <style name="outlineBtn" parent="Base.Widget.AppCompat.Button">
+        <item name="android:background">@drawable/active_btn</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@drawable/active_btn_text</item>
     </style>
 
 </resources>

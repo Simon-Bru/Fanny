@@ -1,0 +1,58 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="edu.bruguerolle.rocher.fanny.fragments.MatchControlsFragment"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/PlayerName"
+        android:textSize="25sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Player " />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <Button
+            android:id="@+id/beerBtn"
+            style="@style/outlineBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Beer" />
+
+        <Button
+            android:id="@+id/gamelleBtn"
+            style="@style/outlineBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gamelle" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_weight="0.5"
+        android:layout_marginTop="30dp"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/pissetteBtn"
+            style="@style/outlineBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pissette" />
+
+        <Button
+            android:id="@+id/cendarBtn"
+            style="@style/outlineBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cendar" />
+    </LinearLayout>
+</LinearLayout>
