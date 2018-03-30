@@ -1,16 +1,16 @@
 package edu.bruguerolle.rocher.fanny.model;
 
 
-import android.location.Location;
-import android.support.annotation.Nullable;
+import com.google.android.gms.maps.model.LatLng;
 
 public class Match {
 
     private int id;
     private Player player1;
     private Player player2;
-    private String extension;
-    private Location location;
+    private boolean fanny;
+    private String imgPath;
+    private LatLng location;
 
     public int getId() {
         return id;
@@ -36,19 +36,27 @@ public class Match {
         this.player2 = player2;
     }
 
-    public String getExtension() {
-        return extension;
+    public String getImgPath() {
+        return imgPath;
     }
 
-    public void setExtension(String extension) {
-        this.extension = extension;
+    public void setImgPath(String imgPath) {
+        this.imgPath = imgPath;
     }
 
-    public Location getLocation() {
+    public LatLng getLocation() {
         return location;
     }
 
-    public void setLocation(Location location) {
+    public void setLocation(LatLng location) {
         this.location = location;
+    }
+
+    public boolean isFanny() {
+        return fanny;
+    }
+
+    public void setFanny(boolean fanny) {
+        this.fanny = fanny;
     }
 }

@@ -9,7 +9,6 @@ public class Player {
     private int gammelleNb  = 0;
     private int cendarNb    = 0;
     private int pissetNb    = 0;
-    private boolean fanny   = false;
 
     public int getId() {
         return id;
@@ -65,14 +64,6 @@ public class Player {
 
     public void setPissetNb(int pissetNb) {
         this.pissetNb = pissetNb;
-    }
-
-    public boolean isFanny() {
-        return fanny;
-    }
-
-    public void setFanny(boolean fanny) {
-        this.fanny = fanny;
     }
 
     public Player() {

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="edu.bruguerolle.rocher.fanny.activities.RecordMatchActivity">
+    tools:activity="edu.bruguerolle.rocher.fanny.activities.RecordMatchActivity">
     <LinearLayout
         android:layout_alignParentStart="true"
         android:orientation="horizontal"

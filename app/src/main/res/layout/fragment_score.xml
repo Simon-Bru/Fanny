@@ -4,7 +4,7 @@
     android:id="@+id/Points"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    tools:context="edu.bruguerolle.rocher.fanny.fragments.ScoreFragment">
+    tools:activity="edu.bruguerolle.rocher.fanny.fragments.ScoreFragment">
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"

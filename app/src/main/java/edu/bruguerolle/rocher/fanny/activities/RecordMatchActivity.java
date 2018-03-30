@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 
 import edu.bruguerolle.rocher.fanny.fragments.MatchControlsFragment;
@@ -13,6 +14,11 @@ import edu.bruguerolle.rocher.fanny.R;
 import edu.bruguerolle.rocher.fanny.fragments.ScoreFragment;
 import edu.bruguerolle.rocher.fanny.model.Match;
 import edu.bruguerolle.rocher.fanny.model.Player;
+
+import static edu.bruguerolle.rocher.fanny.activities.PhotoActivity.ARG_FANNY;
+import static edu.bruguerolle.rocher.fanny.activities.PhotoActivity.ARG_LOSER;
+import static edu.bruguerolle.rocher.fanny.activities.PhotoActivity.ARG_SCORE;
+import static edu.bruguerolle.rocher.fanny.activities.PhotoActivity.ARG_WINNER;
 
 public class RecordMatchActivity extends AppCompatActivity
         implements MatchControlsFragment.MatchControlsButtonsListener,
@@ -42,15 +48,13 @@ public class RecordMatchActivity extends AppCompatActivity
         Bundle bundle = getIntent().getExtras();
         Player player1 = new Player();
         Player player2 = new Player();
-        if(bundle != null && bundle.getString(PLAYER_1) != null) {
-            player1.setName(bundle.getString(PLAYER_1));
-        } else {
-            player1.setName("Player 1");
-        }
-        if(bundle != null && bundle.getString(PLAYER_2) != null) {
-            player2.setName(bundle.getString(PLAYER_2));
-        } else {
-            player2.setName("Player 2");
+        if(bundle != null) {
+            player1.setName(!TextUtils.isEmpty(bundle.getString(PLAYER_1)) ?
+                    bundle.getString(PLAYER_1) :
+                    "Player 1");
+            player2.setName(!TextUtils.isEmpty(bundle.getString(PLAYER_2)) ?
+                    bundle.getString(PLAYER_2) :
+                    "Player 2");
         }
         match.setPlayer1(player1);
         match.setPlayer2(player2);
@@ -91,16 +95,9 @@ public class RecordMatchActivity extends AppCompatActivity
         getSupportFragmentManager().putFragment(outState, PLAYER2_SCORE_FRAG, scoreFragmentPlayer2);
     }
 
-    View.OnClickListener stopMatchHandler = new View.OnClickListener() {
-        public void onClick(View v) {
-            Intent stopRecordActivity = new Intent(RecordMatchActivity.this,PhotoActivity.class);
-            startActivity(stopRecordActivity);
-        }
-    };
-
     @Override
     public void onPointMarked(boolean isOpponent, boolean isPositive) {
-        Player player = null;
+        Player player;
         if(isOpponent) {
             player = match.getPlayer1();
         } else {
@@ -111,8 +108,22 @@ public class RecordMatchActivity extends AppCompatActivity
 
     @Override
     public void onMatchOver(boolean isOpponent) {
-        this.onPointMarked(isOpponent, true);
-//        TODO FINISH ACTIVITY AND INSERT DATA IN DB
+
+//        TODO INSERT DATA IN DB
+
+        Intent stopRecordActivity = new Intent(RecordMatchActivity.this,PhotoActivity.class);
+        stopRecordActivity.putExtra(ARG_WINNER,
+                isOpponent ?
+                        match.getPlayer1().getName() :
+                        match.getPlayer2().getName());
+        Player loser = isOpponent ?
+                match.getPlayer2() :
+                match.getPlayer1();
+        stopRecordActivity.putExtra(ARG_FANNY, loser.getScore() == 0);
+        stopRecordActivity.putExtra(ARG_LOSER, loser.getName());
+        stopRecordActivity.putExtra(ARG_SCORE, match.getPlayer1().getScore()+" - "+match.getPlayer2().getScore());
+        stopRecordActivity.putExtra(ARG_SCORE, match.getPlayer1().getScore()+" - "+match.getPlayer2().getScore());
+        startActivity(stopRecordActivity);
     }
 
     @Override
