@@ -1,13 +1,21 @@
 package edu.bruguerolle.rocher.fanny.activities;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+
+import java.util.List;
 
 import edu.bruguerolle.rocher.fanny.fragments.MatchControlsFragment;
 import edu.bruguerolle.rocher.fanny.R;
@@ -32,12 +40,16 @@ public class RecordMatchActivity extends AppCompatActivity
     private static final String PLAYER2_SCORE_FRAG      = "fragmentScorePlayer2";
     private static final String PLAYER2_CONTROLS_FRAG   = "fragmentControlsPlayer2";
 
+    private static final int LOC_CODE = 6;
+
     private Match match;
 
     private MatchControlsFragment controlsFragmentPlayer1;
     private ScoreFragment scoreFragmentPlayer1;
     private MatchControlsFragment controlsFragmentPlayer2;
     private ScoreFragment scoreFragmentPlayer2;
+
+    private LocationManager locationManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +94,11 @@ public class RecordMatchActivity extends AppCompatActivity
             transac.replace(R.id.scoreContainer2, scoreFragmentPlayer2);
             transac.commit();
         }
+
+        ActivityCompat.requestPermissions(this,
+                new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
+                LOC_CODE);
+        this.locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
     }
 
     @Override
@@ -110,6 +127,11 @@ public class RecordMatchActivity extends AppCompatActivity
     public void onMatchOver(boolean isOpponent) {
 
 //        TODO INSERT DATA IN DB
+
+        Location curLoc = getLastKnownLocation();
+        assert curLoc != null;
+        match.setLatitude(curLoc.getLatitude());
+        match.setLongitude(curLoc.getLongitude());
 
         Intent stopRecordActivity = new Intent(RecordMatchActivity.this,PhotoActivity.class);
         stopRecordActivity.putExtra(ARG_WINNER,
@@ -160,5 +182,40 @@ public class RecordMatchActivity extends AppCompatActivity
 
     private Player getPlayer(String playerIdentifier) {
         return playerIdentifier.equals(PLAYER_1) ? match.getPlayer1() : match.getPlayer2();
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if(requestCode == LOC_CODE) {
+            getLastKnownLocation();
+        }
+    }
+
+
+    private Location getLastKnownLocation() {
+        if (ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
+                    LOC_CODE);
+            return null;
+        }
+
+        List<String> providers = locationManager.getProviders(true);
+        Location bestLocation = null;
+        for (String provider : providers) {
+            Location l = locationManager.getLastKnownLocation(provider);
+            if (l == null) {
+                continue;
+            }
+            if (bestLocation == null || l.getAccuracy() < bestLocation.getAccuracy()) {
+                // Found best last known location: %s", l);
+                bestLocation = l;
+            }
+        }
+        return bestLocation;
     }
 }
