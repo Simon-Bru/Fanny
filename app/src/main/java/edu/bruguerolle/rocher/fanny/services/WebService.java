@@ -6,6 +6,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.ResultReceiver;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -31,12 +32,19 @@ public class WebService extends IntentService {
     private static final String ACTION_POST = "edu.bruguerolle.rocher.fanny.services.action.POST";
     private static final String EXTRA_MATCH = "edu.bruguerolle.rocher.fanny.services.extra.MATCH";
 
+    private static final String ACTION_PUT = "edu.bruguerolle.rocher.fanny.services.action.PUT";
+    private static final String EXTRA_PUT = "edu.bruguerolle.rocher.fanny.services.extra.PUT";
+
     private static final String ACTION_GET = "edu.bruguerolle.rocher.fanny.services.action.GET";
     private static final String EXTRA_DEVICE_ID = "edu.bruguerolle.rocher.fanny.services.extra.DEVICE_ID";
     private static final String EXTRA_CALLBACK = "edu.bruguerolle.rocher.fanny.services.extra.CALLBACK";
     public static final int CALLBACK_CODE = 1;
     public static final String EXTRA_CODE = "edu.bruguerolle.rocher.fanny.services.extra.RESULT";
 
+    /**
+     * Node.JS RESTAPI
+     * To check the code go to https://fannyapi-fpnzdflooq.now.sh/_src
+     */
     private static final String ENDPOINT = "https://fannyapi-fpnzdflooq.now.sh/match/";
 
     public WebService() {
@@ -71,6 +79,21 @@ public class WebService extends IntentService {
         context.startService(intent);
     }
 
+    public static void startActionPut(Context context, String deviceId, String matchSQLId, String imgPath) {
+        Intent intent = new Intent(context, WebService.class);
+        intent.setAction(ACTION_PUT);
+        JSONObject json = new JSONObject();
+        try {
+            json.put("deviceId", deviceId);
+            json.put("id", matchSQLId);
+            json.put("imgPath", imgPath);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    intent.putExtra(EXTRA_PUT, json.toString());
+        context.startService(intent);
+    }
+
     @Override
     protected void onHandleIntent(Intent intent) {
         if (intent != null) {
@@ -85,6 +108,10 @@ public class WebService extends IntentService {
                 final String deviceId = intent.getStringExtra(EXTRA_DEVICE_ID);
                 bundle.putString(EXTRA_CODE, handleActionGet(deviceId));
                 callback.send(CALLBACK_CODE, bundle);
+            }
+            else if(ACTION_PUT.equals(action)) {
+                final String json = intent.getStringExtra(EXTRA_PUT);
+                handleActionPut(json);
             }
         }
     }
@@ -123,6 +150,33 @@ public class WebService extends IntentService {
         try {
             http = (HttpsURLConnection) new URL(ENDPOINT).openConnection();;
             http.setRequestMethod("POST");
+            http.setDoInput(true);
+            http.setDoOutput(true);
+            http.setRequestProperty("Content-Type", "application/json");
+
+            OutputStream os = http.getOutputStream();
+            os.write(matchJson.getBytes("UTF-8"));
+            os.close();
+
+            http.connect();
+
+
+            int status = http.getResponseCode();
+            System.out.println("HTTP status code : " + status);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if(http != null) {
+                http.disconnect();
+            }
+        }
+    }
+
+    private void handleActionPut(String matchJson) {
+        HttpsURLConnection http = null;
+        try {
+            http = (HttpsURLConnection) new URL(ENDPOINT+"/img").openConnection();;
+            http.setRequestMethod("PUT");
             http.setDoInput(true);
             http.setDoOutput(true);
             http.setRequestProperty("Content-Type", "application/json");
