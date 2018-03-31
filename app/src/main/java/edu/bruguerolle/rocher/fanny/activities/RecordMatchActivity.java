@@ -1,24 +1,23 @@
 package edu.bruguerolle.rocher.fanny.activities;
 
-import android.content.ContentValues;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 
 import java.util.List;
 
+import edu.bruguerolle.rocher.fanny.R;
 import edu.bruguerolle.rocher.fanny.db.DBHelper;
 import edu.bruguerolle.rocher.fanny.fragments.MatchControlsFragment;
-import edu.bruguerolle.rocher.fanny.R;
 import edu.bruguerolle.rocher.fanny.fragments.ScoreFragment;
 import edu.bruguerolle.rocher.fanny.model.Match;
 import edu.bruguerolle.rocher.fanny.model.Player;
@@ -141,12 +140,7 @@ public class RecordMatchActivity extends AppCompatActivity
         WebService.startActionPost(getApplicationContext(), match);
 
         Intent photoActivityIntent = new Intent(RecordMatchActivity.this, PhotoActivity.class);
-        photoActivityIntent.putExtra(ARG_WINNER,
-
-        // TODO RIen c'est pour séparer visuellement
-        Intent photoActivityIntent = new Intent(RecordMatchActivity.this,PhotoActivity.class);
-        photoActivityIntent.putExtra(ARG_WINNER,
-                isOpponent ?
+        photoActivityIntent.putExtra(ARG_WINNER, isOpponent ?
                         match.getPlayer1().getName() :
                         match.getPlayer2().getName());
         Player loser = isOpponent ?
