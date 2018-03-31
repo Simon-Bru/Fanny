@@ -1,8 +1,6 @@
 package edu.bruguerolle.rocher.fanny.model;
 
 
-import com.google.android.gms.maps.model.LatLng;
-
 public class Match {
 
     private int id;
@@ -10,7 +8,7 @@ public class Match {
     private Player player2;
     private boolean fanny;
     private String imgPath;
-    private LatLng location;
+    private double location;
 
     public int getId() {
         return id;
@@ -44,11 +42,11 @@ public class Match {
         this.imgPath = imgPath;
     }
 
-    public LatLng getLocation() {
+    public double getLocation() {
         return location;
     }
 
-    public void setLocation(LatLng location) {
+    public void setLocation(double location) {
         this.location = location;
     }
 

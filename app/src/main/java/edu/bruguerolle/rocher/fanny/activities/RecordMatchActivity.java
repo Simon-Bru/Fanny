@@ -1,5 +1,6 @@
 package edu.bruguerolle.rocher.fanny.activities;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.app.FragmentManager;
@@ -33,6 +34,7 @@ public class RecordMatchActivity extends AppCompatActivity
     private static final String PLAYER2_CONTROLS_FRAG   = "fragmentControlsPlayer2";
 
     private Match match;
+    DBHelper myDB;
 
     private MatchControlsFragment controlsFragmentPlayer1;
     private ScoreFragment scoreFragmentPlayer1;
@@ -43,6 +45,8 @@ public class RecordMatchActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record_match);
+
+        myDB = new DBHelper(this);
 
         this.match = new Match();
         Bundle bundle = getIntent().getExtras();
@@ -111,6 +115,13 @@ public class RecordMatchActivity extends AppCompatActivity
 
 //        TODO INSERT DATA IN DB
 
+
+        // Insert a new record
+        ContentValues contentValues = new ContentValues();
+        myDB.insertData(match.getPlayer1(),match.getPlayer2(),match.getLocation(),match.isFanny());
+
+
+        // TODO RIen c'est pour séparer visuellement
         Intent stopRecordActivity = new Intent(RecordMatchActivity.this,PhotoActivity.class);
         stopRecordActivity.putExtra(ARG_WINNER,
                 isOpponent ?
