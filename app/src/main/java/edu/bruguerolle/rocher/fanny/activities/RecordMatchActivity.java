@@ -1,11 +1,13 @@
 package edu.bruguerolle.rocher.fanny.activities;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
@@ -13,6 +15,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 
+import java.io.IOException;
 import java.util.List;
 
 import edu.bruguerolle.rocher.fanny.R;
@@ -24,6 +27,7 @@ import edu.bruguerolle.rocher.fanny.model.Player;
 import edu.bruguerolle.rocher.fanny.services.WebService;
 
 import static edu.bruguerolle.rocher.fanny.activities.PhotoActivity.ARG_FANNY;
+import static edu.bruguerolle.rocher.fanny.activities.PhotoActivity.ARG_INSERTED_ID;
 import static edu.bruguerolle.rocher.fanny.activities.PhotoActivity.ARG_LOSER;
 import static edu.bruguerolle.rocher.fanny.activities.PhotoActivity.ARG_SCORE;
 import static edu.bruguerolle.rocher.fanny.activities.PhotoActivity.ARG_WINNER;
@@ -43,7 +47,7 @@ public class RecordMatchActivity extends AppCompatActivity
     private static final int LOC_CODE = 6;
 
     private Match match;
-    DBHelper myDB;
+    private DBHelper myDB;
 
     private MatchControlsFragment controlsFragmentPlayer1;
     private ScoreFragment scoreFragmentPlayer1;
@@ -135,8 +139,8 @@ public class RecordMatchActivity extends AppCompatActivity
         match.setLongitude(curLoc.getLongitude());
 
         // Insert a new record
-        myDB.insertData(match);
-
+        long id = myDB.insertMatch(match);
+        match.setId(id);
         WebService.startActionPost(getApplicationContext(), match);
 
         Intent photoActivityIntent = new Intent(RecordMatchActivity.this, PhotoActivity.class);
@@ -150,6 +154,7 @@ public class RecordMatchActivity extends AppCompatActivity
         photoActivityIntent.putExtra(ARG_LOSER, loser.getName());
         photoActivityIntent.putExtra(ARG_SCORE, match.getPlayer1().getScore()+" - "+match.getPlayer2().getScore());
         photoActivityIntent.putExtra(ARG_SCORE, match.getPlayer1().getScore()+" - "+match.getPlayer2().getScore());
+        photoActivityIntent.putExtra(ARG_INSERTED_ID, match.getId());
         startActivity(photoActivityIntent);
     }
 

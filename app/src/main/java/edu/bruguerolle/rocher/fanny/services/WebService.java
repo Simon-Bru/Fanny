@@ -79,7 +79,7 @@ public class WebService extends IntentService {
         context.startService(intent);
     }
 
-    public static void startActionPut(Context context, String deviceId, String matchSQLId, String imgPath) {
+    public static void startActionPut(Context context, String deviceId, long matchSQLId, String imgPath) {
         Intent intent = new Intent(context, WebService.class);
         intent.setAction(ACTION_PUT);
         JSONObject json = new JSONObject();

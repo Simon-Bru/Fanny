@@ -19,7 +19,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String UID="_id";
     private static final String PLAYER1NAME_COL= "PLAYER1NAME";
     private static final String PLAYER2NAME_COL= "PLAYER2NAME";
-    private static final String SCORE1_COL= "SCORE&";
+    private static final String SCORE1_COL= "SCORE1";
     private static final String SCORE2_COL= "SCORE2";
     private static final String GAMELLE1_COL= "GAMELLE1";
     private static final String GAMELLE2_COL= "GAMELLE2";
@@ -36,7 +36,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     private static final String CREATE_TABLE = "CREATE TABLE "+TABLE_NAME+
             " ("+UID+" INTEGER PRIMARY KEY AUTOINCREMENT, "+
-            PLAYER1NAME_COL+" VARCHAR ,"+
+            PLAYER1NAME_COL+" VARCHAR, "+
             PLAYER2NAME_COL+" VARCHAR, "+
             SCORE1_COL+" INTEGER, "+
             SCORE2_COL+" INTEGER ,"+
@@ -51,7 +51,7 @@ public class DBHelper extends SQLiteOpenHelper {
             IMAGEPATH+" VARCHAR ," +
             LONGITUDE +" DOUBLE ," +
             LATITUDE +" DOUBLE ," +
-            FANNY_COL+" BOOLEAN ,)";
+            FANNY_COL+" BOOLEAN)";
     private static final String DROP_TABLE ="DROP TABLE IF EXISTS "+TABLE_NAME;
 
 
@@ -66,7 +66,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE);
     }
 
-    public void insertData(Match match){
+    public long insertMatch(Match match){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(PLAYER1NAME_COL,match.getPlayer1().getName());
@@ -75,17 +75,25 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValues.put(SCORE2_COL,match.getPlayer2().getScore());
         contentValues.put(GAMELLE1_COL,match.getPlayer1().getGammelleNb());
         contentValues.put(GAMELLE2_COL,match.getPlayer2().getGammelleNb());
-        contentValues.put(BEER1_COL,match.getPlayer1().getPlayerBeer());
-        contentValues.put(BEER2_COL,match.getPlayer2().getPlayerBeer());
+        contentValues.put(BEER1_COL,match.getPlayer1().getBeerNb());
+        contentValues.put(BEER2_COL,match.getPlayer2().getBeerNb());
         contentValues.put(CENDAR1_COL,match.getPlayer1().getCendarNb());
         contentValues.put(CENDAR2_COL,match.getPlayer2().getCendarNb());
-        contentValues.put(PISSETTE1_COL,match.getPlayer1().getPissetNb());
-        contentValues.put(PISSETTE2_COL,match.getPlayer2().getPissetNb());
+        contentValues.put(PISSETTE1_COL,match.getPlayer1().getPissetteNb());
+        contentValues.put(PISSETTE2_COL,match.getPlayer2().getPissetteNb());
         contentValues.put(LONGITUDE,match.getLongitude());
         contentValues.put(LATITUDE,match.getLatitude());
         contentValues.put(FANNY_COL,match.isFanny());
 
-        db.insert(TABLE_NAME,null ,contentValues);
+        return db.insert(TABLE_NAME,null ,contentValues);
+    }
+
+    public void updateMatchImgPath(long matchId, String imgPath) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(IMAGEPATH, imgPath);
+
+        db.update(TABLE_NAME, values, UID+"="+matchId, null);
     }
 
     @Override
