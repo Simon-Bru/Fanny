@@ -41,7 +41,7 @@ public abstract class ImagePickerBaseActivity extends AppCompatActivity {
     private ImageView imageView;
 
     /**
-     * The RESULT_CODE when the image is chosen
+     * The EXTRA_CODE when the image is chosen
      */
     public final int PICKER_RESULT_CODE  = 1;
     private final int PERMISSION_REQUEST = 2;

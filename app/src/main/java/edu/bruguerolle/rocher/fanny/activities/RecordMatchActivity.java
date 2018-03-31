@@ -6,14 +6,12 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
-import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
 
 import java.util.List;
 
@@ -22,6 +20,7 @@ import edu.bruguerolle.rocher.fanny.R;
 import edu.bruguerolle.rocher.fanny.fragments.ScoreFragment;
 import edu.bruguerolle.rocher.fanny.model.Match;
 import edu.bruguerolle.rocher.fanny.model.Player;
+import edu.bruguerolle.rocher.fanny.services.WebService;
 
 import static edu.bruguerolle.rocher.fanny.activities.PhotoActivity.ARG_FANNY;
 import static edu.bruguerolle.rocher.fanny.activities.PhotoActivity.ARG_LOSER;
@@ -56,7 +55,7 @@ public class RecordMatchActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record_match);
 
-        this.match = new Match();
+        this.match = new Match(getApplicationContext());
         Bundle bundle = getIntent().getExtras();
         Player player1 = new Player();
         Player player2 = new Player();
@@ -126,33 +125,33 @@ public class RecordMatchActivity extends AppCompatActivity
     @Override
     public void onMatchOver(boolean isOpponent) {
 
-//        TODO INSERT DATA IN DB
-
         Location curLoc = getLastKnownLocation();
         assert curLoc != null;
         match.setLatitude(curLoc.getLatitude());
         match.setLongitude(curLoc.getLongitude());
 
-        Intent stopRecordActivity = new Intent(RecordMatchActivity.this,PhotoActivity.class);
-        stopRecordActivity.putExtra(ARG_WINNER,
+        WebService.startActionPost(getApplicationContext(), match);
+
+        Intent photoActivityIntent = new Intent(RecordMatchActivity.this,PhotoActivity.class);
+        photoActivityIntent.putExtra(ARG_WINNER,
                 isOpponent ?
                         match.getPlayer1().getName() :
                         match.getPlayer2().getName());
         Player loser = isOpponent ?
                 match.getPlayer2() :
                 match.getPlayer1();
-        stopRecordActivity.putExtra(ARG_FANNY, loser.getScore() == 0);
-        stopRecordActivity.putExtra(ARG_LOSER, loser.getName());
-        stopRecordActivity.putExtra(ARG_SCORE, match.getPlayer1().getScore()+" - "+match.getPlayer2().getScore());
-        stopRecordActivity.putExtra(ARG_SCORE, match.getPlayer1().getScore()+" - "+match.getPlayer2().getScore());
-        startActivity(stopRecordActivity);
+        photoActivityIntent.putExtra(ARG_FANNY, loser.getScore() == 0);
+        photoActivityIntent.putExtra(ARG_LOSER, loser.getName());
+        photoActivityIntent.putExtra(ARG_SCORE, match.getPlayer1().getScore()+" - "+match.getPlayer2().getScore());
+        photoActivityIntent.putExtra(ARG_SCORE, match.getPlayer1().getScore()+" - "+match.getPlayer2().getScore());
+        startActivity(photoActivityIntent);
     }
 
     @Override
     public void onBeerClicked(String playerId) {
         Player playerById = getPlayer(playerId);
         if(playerById != null) {
-            playerById.setPlayerBeer(playerById.getPlayerBeer()+1);
+            playerById.setBeerNb(playerById.getBeerNb()+1);
         }
     }
 
@@ -176,7 +175,7 @@ public class RecordMatchActivity extends AppCompatActivity
     public void onPissetteClicked(String playerId) {
         Player playerById = getPlayer(playerId);
         if(playerById != null) {
-            playerById.setPissetNb(playerById.getPissetNb()+1);
+            playerById.setPissetteNb(playerById.getPissetteNb()+1);
         }
     }
 
