@@ -1,21 +1,26 @@
 package edu.bruguerolle.rocher.fanny.model;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Player {
 
-    private int id;
     private String name;
     private int score       = 0;
-    private int playerBeer  = 0;
+    private int beerNb      = 0;
     private int gammelleNb  = 0;
     private int cendarNb    = 0;
-    private int pissetNb    = 0;
+    private int pissetteNb  = 0;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public JSONObject toJson() throws JSONException {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("score", score);
+        json.put("beerNb", beerNb);
+        json.put("gammelleNb", gammelleNb);
+        json.put("cendarNb", cendarNb);
+        json.put("pissetteNb", pissetteNb);
+        return json;
     }
 
     public String getName() {
@@ -34,12 +39,12 @@ public class Player {
         this.score = score;
     }
 
-    public int getPlayerBeer() {
-        return playerBeer;
+    public int getBeerNb() {
+        return beerNb;
     }
 
-    public void setPlayerBeer(int playerBeer) {
-        this.playerBeer = playerBeer;
+    public void setBeerNb(int beerNb) {
+        this.beerNb = beerNb;
     }
 
     public int getGammelleNb() {
@@ -58,15 +63,13 @@ public class Player {
         this.cendarNb = cendarNb;
     }
 
-    public int getPissetNb() {
-        return pissetNb;
+    public int getPissetteNb() {
+        return pissetteNb;
     }
 
-    public void setPissetNb(int pissetNb) {
-        this.pissetNb = pissetNb;
+    public void setPissetteNb(int pissetteNb) {
+        this.pissetteNb = pissetteNb;
     }
 
-    public Player() {
-    }
-
+    public Player() {}
 }
