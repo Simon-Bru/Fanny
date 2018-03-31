@@ -2,8 +2,12 @@ package edu.bruguerolle.rocher.fanny.db;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import edu.bruguerolle.rocher.fanny.model.Match;
 import edu.bruguerolle.rocher.fanny.model.Player;
@@ -94,6 +98,43 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(IMAGEPATH, imgPath);
 
         db.update(TABLE_NAME, values, UID+"="+matchId, null);
+    }
+
+    public List<Match> getPreviousMatches() {
+        List<Match> matches = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_NAME, null, null,null,null,null,null,"5");
+        Match match;
+        Player player1, player2;
+        while(cursor.moveToNext()) {
+            match = new Match();
+            player1 = new Player();
+            player2 = new Player();
+            player1.setName(cursor.getString(cursor.getColumnIndex(PLAYER1NAME_COL)));
+            player2.setName(cursor.getString(cursor.getColumnIndex(PLAYER2NAME_COL)));
+            player1.setScore(cursor.getInt(cursor.getColumnIndex(SCORE1_COL)));
+            player2.setScore(cursor.getInt(cursor.getColumnIndex(SCORE2_COL)));
+            player1.setCendarNb(cursor.getInt(cursor.getColumnIndex(CENDAR1_COL)));
+            player2.setCendarNb(cursor.getInt(cursor.getColumnIndex(CENDAR2_COL)));
+            player1.setGammelleNb(cursor.getInt(cursor.getColumnIndex(GAMELLE1_COL)));
+            player2.setGammelleNb(cursor.getInt(cursor.getColumnIndex(GAMELLE2_COL)));
+            player1.setBeerNb(cursor.getInt(cursor.getColumnIndex(BEER1_COL)));
+            player2.setBeerNb(cursor.getInt(cursor.getColumnIndex(BEER2_COL)));
+            player1.setPissetteNb(cursor.getInt(cursor.getColumnIndex(PISSETTE1_COL)));
+            player2.setPissetteNb(cursor.getInt(cursor.getColumnIndex(PISSETTE2_COL)));
+
+            match.setPlayer1(player1);
+            match.setPlayer2(player2);
+            match.setFanny(cursor.getInt(cursor.getColumnIndex(FANNY_COL)) > 0);
+            match.setId(cursor.getLong(cursor.getColumnIndex(UID)));
+            match.setLongitude(cursor.getDouble(cursor.getColumnIndex(LONGITUDE)));
+            match.setLatitude(cursor.getDouble(cursor.getColumnIndex(LATITUDE)));
+            match.setImgPath(cursor.getString(cursor.getColumnIndex(IMAGEPATH)));
+            matches.add(match);
+        }
+
+        return matches;
     }
 
     @Override

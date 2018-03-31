@@ -20,6 +20,8 @@ public class Match {
     private double longitude;
     private double latitude;
 
+    public Match() {}
+
     public Match(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(context.getString(R.string.app_name), Context.MODE_PRIVATE);
         deviceId = sharedPreferences.getString(context.getString(R.string.device_id), "");
@@ -37,6 +39,23 @@ public class Match {
             json.put("longitude", longitude);
             json.put("latitude", latitude);
             return json;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static Match fromJson(JSONObject json) {
+        Match match = new Match();
+        try {
+            match.setId(json.getLong("id"));
+            match.setPlayer1(Player.fromJson(json.getJSONObject("player1")));
+            match.setPlayer2(Player.fromJson(json.getJSONObject("player2")));
+            match.setFanny(json.getBoolean("fanny"));
+            match.setImgPath(json.has("imgPath") ? json.getString("imgPath") : "");
+            match.setLongitude(json.getDouble("longitude"));
+            match.setLatitude(json.getDouble("latitude"));
+            return match;
         } catch (JSONException e) {
             e.printStackTrace();
             return null;

@@ -175,7 +175,7 @@ public class WebService extends IntentService {
     private void handleActionPut(String matchJson) {
         HttpsURLConnection http = null;
         try {
-            http = (HttpsURLConnection) new URL(ENDPOINT+"/img").openConnection();;
+            http = (HttpsURLConnection) new URL(ENDPOINT+"/picture").openConnection();;
             http.setRequestMethod("PUT");
             http.setDoInput(true);
             http.setDoOutput(true);

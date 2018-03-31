@@ -168,7 +168,7 @@ public abstract class ImagePickerBaseActivity extends AppCompatActivity {
             file = new File(directory, fileName);
         } else {
             try {
-                file = File.createTempFile("img", "jpg", getExternalCacheDir());
+                file = File.createTempFile("picture", "jpg", getExternalCacheDir());
             } catch (IOException e) {
                 e.printStackTrace();
             }

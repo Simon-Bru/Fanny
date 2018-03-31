@@ -23,6 +23,17 @@ public class Player {
         return json;
     }
 
+    public static Player fromJson(JSONObject json) throws JSONException {
+        Player player = new Player();
+        player.setName(json.getString("name"));
+        player.setScore(json.getInt("score"));
+        player.setBeerNb(json.getInt("beerNb"));
+        player.setGammelleNb(json.getInt("gammelleNb"));
+        player.setCendarNb(json.getInt("cendarNb"));
+        player.setPissetteNb(json.getInt("pissetteNb"));
+        return player;
+    }
+
     public String getName() {
         return name;
     }
