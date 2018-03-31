@@ -1,10 +1,11 @@
-package edu.bruguerolle.rocher.fanny.activities;
+package edu.bruguerolle.rocher.fanny.db;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import edu.bruguerolle.rocher.fanny.model.Match;
 import edu.bruguerolle.rocher.fanny.model.Player;
 
 /**
@@ -29,14 +30,15 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String PISSETTE1_COL = "PISSETTE1";
     private static final String PISSETTE2_COL = "PISSETTE2";
     private static final String IMAGEPATH = "IMAGEPATH";
-    private static final String LOCATION = "LOCATION";
+    private static final String LONGITUDE = "LONGITUDE";
+    private static final String LATITUDE = "LATITUDE";
     private static final String FANNY_COL = "FANNY";
 
     private static final String CREATE_TABLE = "CREATE TABLE "+TABLE_NAME+
             " ("+UID+" INTEGER PRIMARY KEY AUTOINCREMENT, "+
-            PLAYER1NAME_COL+" TEXT ,"+
-            PLAYER2NAME_COL+" TEXT, "+
-            SCORE1_COL+" INTEGER ," +
+            PLAYER1NAME_COL+" VARCHAR ,"+
+            PLAYER2NAME_COL+" VARCHAR, "+
+            SCORE1_COL+" INTEGER, "+
             SCORE2_COL+" INTEGER ,"+
             GAMELLE1_COL+" INTEGER, "+
             GAMELLE2_COL+" INTEGER, "+
@@ -46,8 +48,9 @@ public class DBHelper extends SQLiteOpenHelper {
             CENDAR2_COL+" INTEGER ," +
             PISSETTE1_COL+" INTEGER ," +
             PISSETTE2_COL+" INTEGER ," +
-            IMAGEPATH+" TEXT ," +
-            LOCATION+" DOUBLE ," +
+            IMAGEPATH+" VARCHAR ," +
+            LONGITUDE +" DOUBLE ," +
+            LATITUDE +" DOUBLE ," +
             FANNY_COL+" BOOLEAN ,)";
     private static final String DROP_TABLE ="DROP TABLE IF EXISTS "+TABLE_NAME;
 
@@ -63,23 +66,24 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE);
     }
 
-    public void insertData(Player player1, Player player2, double location, boolean fanny){
+    public void insertData(Match match){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(PLAYER1NAME_COL,player1.getName());
-        contentValues.put(PLAYER2NAME_COL,player2.getName());
-        contentValues.put(SCORE1_COL,player1.getScore());
-        contentValues.put(SCORE2_COL,player2.getScore());
-        contentValues.put(GAMELLE1_COL,player1.getGammelleNb());
-        contentValues.put(GAMELLE2_COL,player2.getGammelleNb());
-        contentValues.put(BEER1_COL,player1.getPlayerBeer());
-        contentValues.put(BEER2_COL,player2.getPlayerBeer());
-        contentValues.put(CENDAR1_COL,player1.getCendarNb());
-        contentValues.put(CENDAR2_COL,player2.getCendarNb());
-        contentValues.put(PISSETTE1_COL,player1.getPissetNb());
-        contentValues.put(PISSETTE2_COL,player2.getPissetNb());
-        contentValues.put(LOCATION,location);
-        contentValues.put(FANNY_COL,fanny);
+        contentValues.put(PLAYER1NAME_COL,match.getPlayer1().getName());
+        contentValues.put(PLAYER2NAME_COL,match.getPlayer2().getName());
+        contentValues.put(SCORE1_COL,match.getPlayer1().getScore());
+        contentValues.put(SCORE2_COL,match.getPlayer2().getScore());
+        contentValues.put(GAMELLE1_COL,match.getPlayer1().getGammelleNb());
+        contentValues.put(GAMELLE2_COL,match.getPlayer2().getGammelleNb());
+        contentValues.put(BEER1_COL,match.getPlayer1().getPlayerBeer());
+        contentValues.put(BEER2_COL,match.getPlayer2().getPlayerBeer());
+        contentValues.put(CENDAR1_COL,match.getPlayer1().getCendarNb());
+        contentValues.put(CENDAR2_COL,match.getPlayer2().getCendarNb());
+        contentValues.put(PISSETTE1_COL,match.getPlayer1().getPissetNb());
+        contentValues.put(PISSETTE2_COL,match.getPlayer2().getPissetNb());
+        contentValues.put(LONGITUDE,match.getLongitude());
+        contentValues.put(LATITUDE,match.getLatitude());
+        contentValues.put(FANNY_COL,match.isFanny());
 
         db.insert(TABLE_NAME,null ,contentValues);
     }

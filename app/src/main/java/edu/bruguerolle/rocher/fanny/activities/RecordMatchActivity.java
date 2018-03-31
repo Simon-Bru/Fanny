@@ -2,14 +2,13 @@ package edu.bruguerolle.rocher.fanny.activities;
 
 import android.content.ContentValues;
 import android.content.Intent;
-import android.net.Uri;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
 
+import edu.bruguerolle.rocher.fanny.db.DBHelper;
 import edu.bruguerolle.rocher.fanny.fragments.MatchControlsFragment;
 import edu.bruguerolle.rocher.fanny.R;
 import edu.bruguerolle.rocher.fanny.fragments.ScoreFragment;
@@ -118,7 +117,7 @@ public class RecordMatchActivity extends AppCompatActivity
 
         // Insert a new record
         ContentValues contentValues = new ContentValues();
-        myDB.insertData(match.getPlayer1(),match.getPlayer2(),match.getLocation(),match.isFanny());
+        myDB.insertData(match);
 
 
         // TODO RIen c'est pour séparer visuellement

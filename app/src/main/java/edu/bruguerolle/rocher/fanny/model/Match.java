@@ -8,7 +8,8 @@ public class Match {
     private Player player2;
     private boolean fanny;
     private String imgPath;
-    private double location;
+    private double longitude;
+    private double latitude;
 
     public int getId() {
         return id;
@@ -42,12 +43,20 @@ public class Match {
         this.imgPath = imgPath;
     }
 
-    public double getLocation() {
-        return location;
+    public double getLongitude() {
+        return longitude;
     }
 
-    public void setLocation(double location) {
-        this.location = location;
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
     }
 
     public boolean isFanny() {
