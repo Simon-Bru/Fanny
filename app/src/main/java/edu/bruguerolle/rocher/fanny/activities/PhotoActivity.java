@@ -26,7 +26,7 @@ public class PhotoActivity extends ImagePickerBaseActivity {
     private String score;
     private boolean isFanny;
 
-    private Uri imageUri;
+    private String imageUri;
 
     private DBHelper dbHelper;
 
@@ -75,13 +75,13 @@ public class PhotoActivity extends ImagePickerBaseActivity {
             // REMOTE API
             SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.app_name), MODE_PRIVATE);
             String deviceId = sharedPreferences.getString(getString(R.string.device_id), "");
-            WebService.startActionPut(getApplicationContext(), deviceId, matchId, imageUri.getPath());
+            WebService.startActionPut(getApplicationContext(), deviceId, matchId, imageUri);
 
             // LOCAL SQLITE
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    dbHelper.updateMatchImgPath(matchId, imageUri.getPath());
+                    dbHelper.updateMatchImgPath(matchId, imageUri);
                 }
             }).start();
 
@@ -92,7 +92,7 @@ public class PhotoActivity extends ImagePickerBaseActivity {
     };
 
     @Override
-    public void onImagePicked(Uri uri) {
+    public void onImagePicked(String uri) {
         imageUri = uri;
     }
 }

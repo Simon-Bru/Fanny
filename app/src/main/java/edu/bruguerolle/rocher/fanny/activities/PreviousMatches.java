@@ -62,7 +62,7 @@ public class PreviousMatches extends AppCompatActivity {
         @Override
         protected void onPostExecute(List<Match> result) {
             activity.matches = result;
-            activity.mAdapter = new MatchesAdapter(activity.matches);
+            activity.mAdapter = new MatchesAdapter(activity.matches, getApplicationContext());
             activity.mRecyclerView.setAdapter(activity.mAdapter);
         }
     }

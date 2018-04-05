@@ -1,5 +1,8 @@
 package edu.bruguerolle.rocher.fanny.adapter;
 
+import android.content.Context;
+import android.location.Address;
+import android.location.Geocoder;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -10,7 +13,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Locale;
 
 import edu.bruguerolle.rocher.fanny.R;
 import edu.bruguerolle.rocher.fanny.model.Match;
@@ -20,8 +25,32 @@ public class MatchesAdapter extends RecyclerView.Adapter<MatchesAdapter.MatchVie
 
     private List<Match> matches;
 
-    public MatchesAdapter(List<Match> data) {
+    private Context context;
+
+    private Geocoder geocoder;
+
+    public MatchesAdapter(List<Match> data, Context context) {
         matches = data;
+        this.context = context;
+        this.geocoder = new Geocoder(context, Locale.getDefault());
+    }
+
+    private String getAddressFromGeo(double longitude, double latitude) {
+        try {
+            List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
+
+            if (addresses != null) {
+                Address returnedAddress = addresses.get(0);
+                StringBuilder strReturnedAddress = new StringBuilder();
+                return returnedAddress.getThoroughfare();
+            }
+            else {
+                return "";
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "";
+        }
     }
 
     @NonNull
@@ -37,7 +66,8 @@ public class MatchesAdapter extends RecyclerView.Adapter<MatchesAdapter.MatchVie
         Match curMatch = matches.get(position);
 
         holder.fanny.setVisibility(curMatch.isFanny() ? View.VISIBLE : View.GONE);
-//        holder.location.setText();
+        String addressFromGeo = getAddressFromGeo(curMatch.getLongitude(), curMatch.getLatitude());
+        holder.location.setText(addressFromGeo);
         if(!TextUtils.isEmpty(curMatch.getImgPath())) {
             holder.picture.setImageURI(Uri.parse(curMatch.getImgPath()));
             holder.picture.setVisibility(View.VISIBLE);

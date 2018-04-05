@@ -2,9 +2,11 @@ package edu.bruguerolle.rocher.fanny.activities;
 
 import android.Manifest;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Environment;
 import android.os.Parcelable;
@@ -55,7 +57,7 @@ public abstract class ImagePickerBaseActivity extends AppCompatActivity {
         }
     }
 
-    public abstract void onImagePicked(Uri uri);
+    public abstract void onImagePicked(String uri);
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -71,11 +73,12 @@ public abstract class ImagePickerBaseActivity extends AppCompatActivity {
 
                 if (isCamera) {
                     imageUri = Uri.fromFile(tmpFile);
+                    onImagePicked(imageUri.getPath());
                 } else {
                     imageUri = data == null ? null : data.getData();
+                    onImagePicked(getRealPathFromURI(imageUri));
                 }
                 imageView.setImageURI(imageUri);
-                onImagePicked(imageUri);
             }
         }
     }
@@ -174,5 +177,25 @@ public abstract class ImagePickerBaseActivity extends AppCompatActivity {
             }
         }
         return file;
+    }
+
+    public String getRealPathFromURI(Uri contentUri) {
+        Cursor cursor = null;
+        try {
+            String[] proj = { MediaStore.Images.Media.DATA };
+            cursor = getApplicationContext().getContentResolver().query(contentUri,  proj, null, null, null);
+            assert cursor != null;
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            return cursor.getString(column_index);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        return "";
     }
 }
